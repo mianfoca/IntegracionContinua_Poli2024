@@ -1,0 +1,140 @@
+<div class="top-0 start-0 animate__animated animate__fadeIn">
+    <a class="btn btn-lg text-white" (click)="goBack()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-left"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+        </svg>
+    </a>
+</div>
+
+<main class="container detail-info animate__animated animate__fadeIn animate__slower" *ngIf="pokemon">
+    <section class="detail-info__pokemon">
+        <div class="container col-12">
+            <div class="row justify-content-center" style="position: relative;">
+
+                <div class="col-lg-6 d-flex flex-wrap align-items-center">
+                    <img appImgBroken src="{{ links }}{{pokemon.id}}.png"
+                        alt="{{pokemon.name}}" class="img-fluid mx-auto" style="width: 300px;">
+
+                    <div class="bg-details">
+                        <h1 class="text-center">{{pokemon.name}}</h1>
+
+                        <div class="details-card__types mb-3">
+                            <div class="details-card__type" *ngFor="let type of pokemon.types"
+                                [class]="'details-card__type--' + type.type.name">
+                                <p>
+                                    <img alt="" class="img-fluid" src="assets/type-icons/{{type.type.name}}.png"
+                                        style="width: 15%;">
+                                    {{type.type.name | titlecase}}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="details-card__about mb-4">
+                            <div class="details-card__about--info">
+                                <div class="mt-2 mb-2">
+                                    <p>
+                                        <img class="img-fluid mr-1" src="assets/icon/weight.svg" alt="weight"
+                                            style="width: 15px;">
+                                        {{pokemon.weight}} kg
+                                    </p>
+                                </div>
+                                <div>
+                                    <span>Weight</span>
+                                </div>
+                            </div>
+                            <div class="details-card__about--info">
+                                <div class="mt-2 mb-2">
+                                    <p>
+                                        <img class="img-fluid mr-1" src="assets/icon/height.svg" alt="height"
+                                            style="width: 10px;">
+                                        {{pokemon.height}} m
+                                    </p>
+                                </div>
+                                <div>
+                                    <span>Height</span>
+                                </div>
+                            </div>
+                            <div class="details-card__about--info">
+                                <div class="mt-2 mb-2">
+                                    <p>
+                                        <img class="img-fluid mr-1" src="assets/icon/exp.svg" alt="exp"
+                                            style="width: 18px;">
+                                        {{pokemon.base_experience}} exp
+                                    </p>
+                                </div>
+                                <div>
+                                    <span>Experience</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="details-card col-lg-5 d-flex flex-wrap justify-content-center">
+                    <div class="details-card__stats my-auto mx-auto ">
+                        <div class="inner">
+                            <table class="table table-borderless text-white">
+                                <tr>
+                                    <th colspan="2" class="text-center">
+                                        <h5>Base Stats</h5>
+                                    </th>
+                                </tr>
+
+                                <tr *ngFor="let stat of pokemon.stats | baseStats">
+                                    <td class="text-right br-table">{{stat.stat.name}}</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated rounded-sm"
+                                                role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                                [style.width]="stat.base_stat + '%'">
+                                                <span>{{stat.base_stat}}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <section class="detail-info__evolution mt-4 mb-2">
+        <div class="container mb-3">
+            <h1 class="text-center text-uppercase">
+                <span style="border-bottom: 2px solid #ffffff3b;">Evolutions</span>
+            </h1>
+        </div>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-4" *ngFor="let evolution of pokemon.evolutions">
+                    <div class="evo-container" [routerLink]="['/pokemon/', evolution.name]">
+                        <ng-container *ngIf="pokemon.evolutions.length === 1">
+                            <div class="dne">This Pokémon does not evolve.</div>
+                        </ng-container>
+
+                        <div class="mb-2">
+                            <img appImgBroken alt="{{evolution.name}}" class="evo-img mx-auto d-block"
+                                src="{{links}}{{evolution.id}}.png">
+                        </div>
+
+                        <div class="text-uppercase text-center">
+                            #{{evolution.id}}
+                            <div class="evo-name">
+                                <span class="evo-name">{{evolution.name | titlecase}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</main>
