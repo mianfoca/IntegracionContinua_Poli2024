@@ -1,13 +1,22 @@
 version: '3.8'
 
 services:
+  back-end:
+    container_name: back-end
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - poli-network
   front-end:
     container_name: front-end
     build:
       context: ./front-end
       dockerfile: Dockerfile
     ports:
-      - "8080:80"
+      - "8081:80"
     networks:
       - poli-network
 
