@@ -5,12 +5,15 @@ import { IPokemonDetails } from '@interfaces/pokemon.interface';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class PokemonService {
 
-  private BASE_URL = 'https://pokeapi.co/api/v2'
+  private BASE_URL = environment.apiUrl
   private limitPage = 20;
   offsetPage = 0;
 

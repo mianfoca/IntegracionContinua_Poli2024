@@ -4,11 +4,30 @@ using System.Diagnostics;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/v2/pokemon/")]
+    [Route("api/v2/")]
     [ApiController]
     public class PokemonController : ControllerBase
     {
-        [HttpGet("")]
+        [HttpGet("type/")]
+        public async Task<IActionResult> GetTypes()
+        {
+            try
+            {
+                using (var client = new Infrastructure.Client.Rest.PokeApiClient())
+                {
+                    var response = await client.GetTypesAsync();
+
+                    return Ok(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.ToString());
+                return BadRequest("fail get all types");
+            }
+        }
+
+        [HttpGet("pokemon/")]
         public async Task<IActionResult> GetAll([FromQuery] Domain.DTOs.PokemonRequest request)
         {
             try
@@ -27,14 +46,14 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet("{Id}")]
-        public async Task<IActionResult> GetByID([FromRoute] Domain.DTOs.PokemonDetailRequest request)
+        [HttpGet("pokemon/{Name}")]
+        public async Task<IActionResult> GetByName([FromRoute] Domain.DTOs.PokemonDetailRequest request)
         {
             try
             {
                 using (var client = new Infrastructure.Client.Rest.PokeApiClient())
                 {
-                    var response = await client.GetByIDAsync(request);
+                    var response = await client.GetByNameAsync(request);
 
                     return Ok(response);
                 }

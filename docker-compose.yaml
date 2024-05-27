@@ -5,20 +5,26 @@ services:
     container_name: back-end
     build:
       context: ./back-end
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
+      dockerfile: Dockerfile    
     networks:
       - poli-network
-  front-end:
-    container_name: front-end
+    ports:
+      - "8080:8080"
+
+  frontend:
+    container_name: frontend
     build:
       context: ./front-end
       dockerfile: Dockerfile
-    ports:
-      - "8081:80"
+    depends_on:
+      - back-end
+    environment:
+      # - API_URL=https://pokeapi.co/api/v2
+      - API_URL=http://localhost:8080/api/v2
     networks:
       - poli-network
+    ports:
+      - "8081:80"    
 
 networks:
   poli-network:
