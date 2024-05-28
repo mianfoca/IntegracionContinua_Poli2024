@@ -64,6 +64,21 @@ namespace Infrastructure.Client.Rest
 
             return pokemonResponse;
         }
+        
+        public async Task<Domain.DTOs.PokemonEvolutionResponse> GetEvolutionByNameAsync(Domain.DTOs.PokemonDetailRequest request)
+        {
+
+            string url = $"{this.host}/api/v2/evolution-chain/{request.Name}";
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            Domain.DTOs.PokemonEvolutionResponse pokemonResponse = JsonConvert.DeserializeObject<Domain.DTOs.PokemonEvolutionResponse>(responseBody);
+
+            return pokemonResponse;
+        }
+
 
         public void Dispose()
         {
