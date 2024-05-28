@@ -64,5 +64,24 @@ namespace WebAPI.Controllers
                 return BadRequest("fail get pokemon by id");
             }
         }
+
+        [HttpGet("pokemon-species/{Name}")]
+        public async Task<IActionResult> GetSpeciesByName([FromRoute] Domain.DTOs.PokemonDetailRequest request)
+        {
+            try
+            {
+                using (var client = new Infrastructure.Client.Rest.PokeApiClient())
+                {
+                    var response = await client.GetSpeciesByNameAsync(request);
+
+                    return Ok(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.ToString());
+                return BadRequest("fail get pokemon by id");
+            }
+        }
     }
 }
