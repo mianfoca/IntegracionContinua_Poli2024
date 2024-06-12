@@ -10,7 +10,7 @@ pipeline {
         stage('Build Front') {
             steps {
                 script {
-                    dir('front') {
+                    dir('front-end') {
                         sh 'docker build -t front:latest .'
                     }
                 }
@@ -19,7 +19,7 @@ pipeline {
         stage('Build Back') {
             steps {
                 script {
-                    dir('back') {
+                    dir('back-end') {
                         sh 'docker build -t back:latest .'
                     }
                 }
