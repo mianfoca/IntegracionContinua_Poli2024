@@ -9,7 +9,7 @@ services:
     networks:
       - poli-network
     ports:
-      - "8080:8080"
+      - "8081:8080"
 
   frontend:
     container_name: frontend
@@ -20,11 +20,11 @@ services:
       - back-end
     environment:
       # - API_URL=https://pokeapi.co/api/v2
-      - API_URL=http://localhost:8080/api/v2
+      - API_URL=http://localhost:8081/api/v2
     networks:
       - poli-network
     ports:
-      - "8081:80"    
+      - "8082:80"    
 
 networks:
   poli-network:
