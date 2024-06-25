@@ -1,32 +1,32 @@
 version: '3.8'
 
 services:
-  back-end:
-    container_name: back-end
+  own-back-end:
+    container_name: own-back-end
     build:
       context: ./back-end
       dockerfile: Dockerfile    
     networks:
-      - poli-network
+      - own-poli-network
     ports:
-      - "8081:8080"
+      - "9091:8080"
 
-  frontend:
-    container_name: frontend
+  own-frontend:
+    container_name: own-frontend
     build:
       context: ./front-end
       dockerfile: Dockerfile
     depends_on:
-      - back-end
+      - own-back-end
     environment:
       # - API_URL=https://pokeapi.co/api/v2
-      - API_URL=http://localhost:8081/api/v2
+      - API_URL=http://localhost:9091/api/v2
     networks:
-      - poli-network
+      - own-poli-network
     ports:
-      - "8082:80"    
+      - "9092:80"    
 
 networks:
-  poli-network:
+  own-poli-network:
     driver: bridge
-    name: poli-network
+    name: own-poli-network
