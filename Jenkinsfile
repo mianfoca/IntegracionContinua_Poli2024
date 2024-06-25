@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/crubio21/IntegracionContinua_Poli2024'
+                git branch: 'main', url: 'https://github.com/mianfoca/IntegracionContinua_Poli2024'
             }
         }
         stage('Build Front') {
