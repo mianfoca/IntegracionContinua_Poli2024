@@ -20,7 +20,7 @@ services:
       - own-back-end
     environment:
       # - API_URL=https://pokeapi.co/api/v2
-      - API_URL=http://localhost:9091/api/v2
+      - API_URL=http://192.168.0.17:9091/api/v2
     networks:
       - own-poli-network
     ports:
