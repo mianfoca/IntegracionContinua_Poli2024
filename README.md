@@ -14,7 +14,8 @@ El repositorio está organizado en las siguientes carpetas y archivos principale
 
 ## Tecnologías Utilizadas
 - **Lenguajes de programación**: 
-  - C# (47.2%)
+  - C# para el Backend
+  - JavaScript para el Frontend
   - Otros lenguajes y tecnologías que se están utilizando en este proyecto.
 
 ## Instalación
